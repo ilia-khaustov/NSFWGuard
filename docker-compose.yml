@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+
+  nsfwapi:
+    image: open_nsfw
+    restart: always
+    ports:
+      - "4200:8080"
+
+  tgbot:
+    build: .
+    volumes:
+      - "./NSFWGuard:/go/src/NSFWGuard"
+    environment:
+      TLGRM_TOKEN: "${TLGRM_TOKEN}"
+      NSFW_API_ADDR: "${NSFW_API_ADDR}"
+      NSFW_API_PREC: "${NSFW_API_PREC}"
